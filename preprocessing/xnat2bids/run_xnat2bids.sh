@@ -46,7 +46,7 @@ declare -A sessions=([111]="XNAT_E00008" \
                      [002]="XNAT13_E00011")
 
 # Dictionary of series to skip per subject
-declare -A skip_map=([111]="-s 1 2 3 4 5 11" \
+declare -A skip_map=([111]="-s 1 -s 2 -s 3 -s 4 -s 5 -s 11" \
                      [002]="-s 6")
 
 # Use the task array ID to get the right value for this job
