@@ -5,17 +5,17 @@
 #SBATCH --time 18:00:00
 #SBATCH -J fmriprep
 #SBATCH -o /gpfs/scratch/%u/logs/fmriprep-%A_%a.out
-#SBATCH --array=135,137
+#SBATCH --array=111
 
 #--------- set up directories ---------
 # Your working directory in Oscar, usually /gpfs/data/<your PI's group>.
 data_dir=/gpfs/data/bnc
-investigator=sanes
-study_label=sadlum
+investigator=bnc
+study_label=demodat
 
 # Output directory
 # It has to be under the data_dir, otherwise it won't be seen by singularity
-root_dir=${data_dir}/shared/bids-export/${USER}
+root_dir=${data_dir}/shared/bids-export
 bids_dir=${root_dir}/${investigator}/study-${study_label}/bids
 
 #--------- paticipant specific variables ---------
