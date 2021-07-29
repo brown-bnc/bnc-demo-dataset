@@ -5,7 +5,7 @@
 #SBATCH -c 2
 #SBATCH -J xnat2bids
 #SBATCH -o /gpfs/scratch/%u/logs/xnat2bids-%A_%a.out
-#SBATCH --array=135,137
+#SBATCH --array=111
 
 #--------- Variables ---------
 # This line makes our bash script complaint if we have undefined variables
@@ -20,7 +20,7 @@ set +a
 #--------- xnat-tools ---------
 
 # version of xnat2bids being used
-version=v1.0.2
+version=v1.0.5
 # Path to Singularity Image for xnat-tools (maintained by bnc)
 simg=/gpfs/data/bnc/simgs/brownbnc/xnat-tools-${version}.sif
 
@@ -29,25 +29,25 @@ simg=/gpfs/data/bnc/simgs/brownbnc/xnat-tools-${version}.sif
 data_dir=/gpfs/data/bnc
 
 # Output directory
-output_dir=${data_dir}/shared/bids-export/${USER}
+output_dir=${data_dir}/shared/bids-export
 
 mkdir -m 775 ${output_dir} || echo "Output directory already exists"
 
 # The bidsmap file for your study lives under ${bidsmap_dir}/${bidsmap_file}
-bidsmap_dir=/users/$USER/src/bnc/sanes_sadlum/preprocessing/xnat2bids
-bidsmap_file=sanes_sadlum.json
+bidsmap_dir=/users/$USER/src/bnc/bnc_demo_dataset/preprocessing/xnat2bids
+bidsmap_file=bidsmap.json
 tmp_dir=/gpfs/scratch/$USER/xnat2bids
 
 mkdir -m 775 ${tmp_dir} || echo "Temp directory already exists"
 
 #----------- Dictionaries for subject specific variables -----
 # Dictionary of sessions to subject
-declare -A sessions=([137]="XNAT3_E00035" \
-                     [135]="XNAT3_E00013")
+declare -A sessions=([111]="XNAT_E00008" \
+                     [002]="XNAT13_E00011")
 
 # Dictionary of series to skip per subject
-declare -A skip_map=([137]="-s 6 -s 15 -s 16 -s 17 -s 18" \
-                     [135]="-s 6 -s 8 -s 15 -s 16 -s 17 -s 18")
+declare -A skip_map=([111]="-s 1 2 3 4 5 11" \
+                     [002]="-s 6")
 
 # Use the task array ID to get the right value for this job
 XNAT_SESSION=${sessions[${SLURM_ARRAY_TASK_ID}]}
