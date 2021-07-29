@@ -1,5 +1,6 @@
-# Processing of Sanes Sadlum Data
+# Sample scripts for processing BNC's Demo Dataset
 
-Scripts and parameter files for Sanes/Sadlum data
+## Contents:
 
-Processing is done on Oscar with Slurm Batch Scripts and signgularity containers maintained by BNC
+- `preprocessing/xnat2bids:` Slurm batch script to bring data from XNAT into Oscar in BIDS format
+- `preprocessing/fmriprep:` Slurm batch script to run fmripre on the demo dataset
